@@ -41,5 +41,12 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "postcss-loader": "^6.2.1"
+  },
+  "resolutions": {
+    "autoprefixer": "10.4.5"
   }
+ 
 }
