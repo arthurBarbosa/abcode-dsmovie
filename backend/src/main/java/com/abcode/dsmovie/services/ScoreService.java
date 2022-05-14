@@ -9,6 +9,7 @@ import com.abcode.dsmovie.repositories.MovieRepository;
 import com.abcode.dsmovie.repositories.ScoreRepository;
 import com.abcode.dsmovie.repositories.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ScoreService {
@@ -23,6 +24,7 @@ public class ScoreService {
         this.scoreRepository = scoreRepository;
     }
 
+    @Transactional
     public MovieDTO saveScore(ScoreDTO dto) {
 
         User user = userRepository.findByEmail(dto.getEmail());
@@ -33,10 +35,11 @@ public class ScoreService {
         }
 
         Movie movie = movieRepository.findById(dto.getMovieId()).orElseThrow(RuntimeException::new);
+
         Score score = new Score();
         score.setMovie(movie);
         score.setUser(user);
-
+        score.setValue(dto.getScore());
         score = scoreRepository.saveAndFlush(score);
 
         Double sum = 0.0;
